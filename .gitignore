@@ -44,3 +44,6 @@ lerna-debug.log*
 # Package Managers
 package-lock.json
 pnpm-lock.yaml
+
+# Database
+tmp/app.db
