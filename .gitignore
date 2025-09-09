@@ -46,4 +46,4 @@ package-lock.json
 pnpm-lock.yaml
 
 # Database
-tmp/app.db
+db/app.db
