@@ -7,14 +7,16 @@ A lightweight financial transactions API built with Fastify, TypeScript, and SQL
 This is a Node.js API service designed to handle financial transactions with session-based user identification. The application follows functional requirements for transaction management and implements proper data isolation between users.
 
 ### Functional Requirements
+
 - [ ] Users can create new transactions
-- [ ] Users can get account summary  
+- [ ] Users can get account summary
 - [ ] Users can list all their transactions
 - [ ] Users can view individual transactions
 - [ ] Session-based user identification
 - [ ] Users can only view transactions they created
 
 ### Non-Functional Requirements
+
 - [ ] Transaction types: credit (adds to total) or debit (subtracts from total)
 - [ ] User identification between requests via sessions
 - [ ] Data isolation - users only see their own transactions
@@ -22,6 +24,7 @@ This is a Node.js API service designed to handle financial transactions with ses
 ## 🏗️ Architecture & Tech Stack
 
 ### Core Technologies
+
 - **Runtime**: Node.js with TypeScript
 - **Framework**: Fastify 5.6.0
 - **Database**: SQLite with better-sqlite3
@@ -31,6 +34,7 @@ This is a Node.js API service designed to handle financial transactions with ses
 - **Code Quality**: ESLint with Rocketseat config
 
 ### Development Tools
+
 - **TypeScript Compiler**: 5.9.2
 - **Runtime**: tsx for development with watch mode
 - **Linting**: ESLint with automatic fixing
@@ -60,17 +64,20 @@ fastify-api/
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 - Node.js (version 18+)
 - npm or yarn
 
 ### Installation
 
 1. **Clone and install dependencies**
+
 ```bash
 npm install
 ```
 
 2. **Environment Setup**
+
 ```bash
 # Copy the environment template
 cp .env.example .env
@@ -82,12 +89,14 @@ cp .env.example .env
 ```
 
 3. **Database Setup**
+
 ```bash
 # Run database migrations
 npm run knex migrate:latest
 ```
 
 4. **Start Development Server**
+
 ```bash
 npm run dev
 ```
@@ -97,6 +106,7 @@ The server will start on `http://localhost:8000` (or your configured PORT).
 ## 🗄️ Database Schema
 
 ### Transactions Table
+
 ```sql
 CREATE TABLE transactions (
     id UUID PRIMARY KEY,
@@ -108,8 +118,9 @@ CREATE TABLE transactions (
 ```
 
 **Fields:**
+
 - `id`: Unique transaction identifier
-- `session_id`: User session identifier for data isolation  
+- `session_id`: User session identifier for data isolation
 - `title`: Transaction description
 - `amount`: Transaction amount (positive for credit, negative for debit)
 - `created_at`: Timestamp of transaction creation
@@ -119,48 +130,60 @@ CREATE TABLE transactions (
 ### Current Endpoints
 
 #### `GET /`
+
 **Test endpoint that creates a sample transaction**
 
 **Response:**
+
 ```json
-[{
+[
+  {
     "id": "uuid-string",
-    "title": "Test Transaction", 
+    "title": "Test Transaction",
     "amount": 1000,
     "created_at": "2025-01-01T12:00:00.000Z"
-}]
+  }
+]
 ```
 
 #### `GET /get-transactions`
+
 **Retrieve all transactions**
 
 **Response:**
+
 ```json
-[{
+[
+  {
     "id": "uuid-string",
     "session_id": "uuid-string",
     "title": "Transaction Title",
     "amount": 1000,
     "created_at": "2025-01-01T12:00:00.000Z"
-}]
+  }
+]
 ```
 
 ### Planned Endpoints (To Be Implemented)
 
 #### `POST /transactions`
+
 Create a new transaction
+
 ```json
 {
-    "title": "Grocery Shopping",
-    "amount": -150.00,
-    "type": "debit"
+  "title": "Grocery Shopping",
+  "amount": -150.0,
+  "type": "debit"
 }
 ```
 
 #### `GET /transactions/:id`
+
 Get a specific transaction by ID
 
 #### `GET /summary`
+
 Get account summary with total balance
 
 ## 🛠️ Development
@@ -175,7 +198,7 @@ npm run dev
 npm run knex migrate:latest
 npm run knex migrate:rollback
 
-# Code linting and formatting  
+# Code linting and formatting
 npm run lint
 
 # Custom knex commands
@@ -184,25 +207,28 @@ npm run knex -- [knex-command]
 
 ### Environment Variables
 
-| Variable | Description | Default | Required |
-|----------|-------------|---------|----------|
-| `NODE_ENV` | Environment mode | `development` | No |
-| `DATABASE_URL` | SQLite database file path | - | Yes |
-| `PORT` | Server port | `8000` | No |
+| Variable       | Description               | Default       | Required |
+| -------------- | ------------------------- | ------------- | -------- |
+| `NODE_ENV`     | Environment mode          | `development` | No       |
+| `DATABASE_URL` | SQLite database file path | -             | Yes      |
+| `PORT`         | Server port               | `8000`        | No       |
 
 ### Database Migrations
 
 **Create new migration:**
+
 ```bash
 npm run knex migrate:make migration_name
 ```
 
 **Run migrations:**
+
 ```bash
 npm run knex migrate:latest
 ```
 
 **Rollback last migration:**
+
 ```bash
 npm run knex migrate:rollback
 ```
@@ -210,17 +236,20 @@ npm run knex migrate:rollback
 ## 🔧 Configuration
 
 ### TypeScript Config
+
 - Target: ES2020
-- Module: CommonJS  
+- Module: CommonJS
 - Strict mode enabled
 - Source maps generated
 - Declaration files generated
 
 ### ESLint Config
+
 - Rocketseat Node.js configuration
 - Automatic code fixing enabled
 
-### Database Config  
+### Database Config
+
 - Client: better-sqlite3
 - Null as default for optional fields
 - Migrations directory: `./db/migrations`
@@ -229,13 +258,14 @@ npm run knex migrate:rollback
 ## 🏃‍♂️ Next Steps
 
 ### Immediate Priorities
+
 1. **Implement session management**
    - Add session creation endpoint
    - Implement session-based transaction filtering
 
 2. **Complete CRUD operations**
    - `POST /transactions` - Create transaction
-   - `GET /transactions/:id` - Get single transaction  
+   - `GET /transactions/:id` - Get single transaction
    - `GET /summary` - Account summary
 
 3. **Add transaction types**
@@ -248,6 +278,7 @@ npm run knex migrate:rollback
    - Add database error handling
 
 ### Future Enhancements
+
 - Input validation with Zod schemas
 - Authentication & authorization
 - Transaction categories
