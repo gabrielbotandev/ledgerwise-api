@@ -1,15 +1,16 @@
-# FinFlow API - Financial Transactions Service
+# Ledgerwise API - Financial Control System
 
-A lightweight financial transactions API built with Fastify, TypeScript, and SQLite using Knex.js for database management.
+A lightweight financial control API built with Fastify, TypeScript, and SQLite using Knex.js for database management.
 
 ## 📋 Project Overview
 
-This is a Node.js API service designed to handle financial transactions with session-based user identification. The application follows functional requirements for transaction management and implements proper data isolation between users.
+Ledgerwise is a Node.js API service designed for personal financial control and transaction management with session-based user identification. The application provides comprehensive transaction tracking, balance monitoring, and implements proper data isolation between users.
 
 ### 🏁 Project Status
 
 ✅ **All core features implemented**  
-📋 **Next steps**: Unit tests and deployment to Render
+✅ **E2E tests implemented with Vitest**
+📋 **Next steps**: Deployment to Render
 
 ### Functional Requirements
 
@@ -42,13 +43,15 @@ This is a Node.js API service designed to handle financial transactions with ses
 
 - **TypeScript Compiler**: 5.9.2
 - **Runtime**: tsx for development with watch mode
+- **Testing Framework**: Vitest 3.2.4 for end-to-end testing
+- **HTTP Testing**: Supertest for complete API route testing
 - **Linting**: ESLint with automatic fixing
 - **Formatting**: Prettier for code formatting
 
 ## 📁 Project Structure
 
 ```
-finflow-api/
+ledgerwise-api/
 ├── src/
 │   ├── server.ts              # Main server setup
 │   ├── database.ts            # Database configuration and connection
@@ -60,9 +63,11 @@ finflow-api/
 │   └── migrations/
 │       ├── 20250909183636_create-transactions.ts
 │       └── 20250909191347_add-session-id-to-transactions.ts
+├── test/                     # Test files
 ├── package.json               # Dependencies and scripts
 ├── tsconfig.json             # TypeScript configuration
 ├── knexfile.ts               # Knex database configuration
+├── vitest.config.ts          # Vitest configuration
 ├── eslint.config.mjs         # ESLint configuration
 ├── .prettierrc               # Prettier configuration
 ├── .env.example              # Environment variables template
@@ -111,6 +116,45 @@ npm run dev
 ```
 
 The server will start on `http://localhost:8000` (or your configured PORT).
+
+## 🧪 Testing
+
+The project uses Vitest for end-to-end testing.
+
+### Running Tests
+
+```bash
+# Run all tests once
+npm test
+
+# Run tests in watch mode (reruns tests when files change)
+npm run test -- --watch
+
+# Run tests with coverage report
+npm run test -- --coverage
+
+# Run specific test files
+npm run test -- transactions
+
+# Run tests in a specific directory
+npm run test -- test/routes
+```
+
+### Test Structure
+
+The test suite covers:
+
+- **E2E Route Tests**: Complete API endpoint testing with real HTTP requests
+- **Database Integration**: Transaction operations and data isolation testing
+- **Authentication Flows**: Session-based authentication end-to-end testing
+- **Full Request Lifecycle**: Testing complete request/response cycles
+
+### Test Environment
+
+- Tests use an in-memory SQLite database
+- Automatic database setup/teardown for each test suite
+- Mock sessions and isolated test data
+- HTTP testing with Fastify's inject method and supertest
 
 ## 🗄️ Database Schema
 
@@ -241,6 +285,11 @@ CREATE TABLE transactions (
 # Development with hot reload
 npm run dev
 
+# Testing
+npm test                    # Run all tests once
+npm run test -- --watch     # Run tests in watch mode
+npm run test -- --coverage  # Run tests with coverage
+
 # Database migrations
 npm run knex migrate:latest
 npm run knex migrate:rollback
@@ -307,11 +356,11 @@ npm run knex migrate:rollback
 
 ### Planned Improvements
 
-- [ ] **Unit Tests**: Implement comprehensive test suite
-- [ ] **Integration Tests**: API endpoint testing
+- [x] **E2E Tests**: Complete route testing with Vitest and Supertest
 - [ ] **Deployment**: Production deployment on Render
 - [ ] **API Documentation**: OpenAPI/Swagger documentation
 - [ ] **Error Handling**: Enhanced error responses and logging
+- [ ] **Performance**: API performance monitoring and optimization
 
 ## 🤝 Contributing
 
