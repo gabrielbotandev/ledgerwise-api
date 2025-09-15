@@ -31,12 +31,12 @@
   "dependencies": {
     "@fastify/cookie": "^11.0.2",
     "@rocketseat/eslint-config": "^3.0.12",
-    "better-sqlite3": "^12.2.0",
     "dotenv": "^17.2.2",
     "eslint": "^9.35.0",
     "fastify": "^5.6.0",
     "knex": "^3.1.0",
     "pg": "^8.16.3",
+    "sqlite3": "^5.1.7",
     "zod": "^4.1.5"
   }
 }
