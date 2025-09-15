@@ -14,6 +14,7 @@ export default [
       '@stylistic/indent': 'off',
       '@stylistic/quotes': 'off',
       '@stylistic/comma-dangle': 'off',
+      '@stylistic/linebreak-style': 'unix',
     },
   },
 ]
