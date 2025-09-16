@@ -187,6 +187,14 @@ CREATE TABLE transactions (
 - Session cookies expire after 7 days
 - Protected routes require valid session ID
 
+### CORS Configuration
+
+- **Development**: Allows all origins for easy testing
+- **Production**: Configurable allowed origins via `FRONTEND_URL` environment variable
+- **Credentials**: Enabled for cookie-based authentication
+- **Methods**: GET, POST, PUT, DELETE, OPTIONS
+- **Headers**: Content-Type, Authorization, Cookie
+
 ### Middleware
 
 - `checkSessionIdExists`: Validates session cookie for protected routes
@@ -308,6 +316,22 @@ npm run knex -- [knex-command]
 | `NODE_ENV`     | Environment mode          | `development` | No       |
 | `DATABASE_URL` | SQLite database file path | -             | Yes      |
 | `PORT`         | Server port               | `8000`        | No       |
+| `FRONTEND_URL` | Frontend URL for CORS     | -             | No       |
+
+### Environment Setup Example
+
+```bash
+# Development
+NODE_ENV=development
+DATABASE_URL=./db/app.db
+PORT=8000
+
+# Production
+NODE_ENV=production
+DATABASE_URL=postgresql://user:pass@host:port/db
+PORT=8000
+FRONTEND_URL=https://your-frontend.vercel.app
+```
 
 ### Database Migrations
 
